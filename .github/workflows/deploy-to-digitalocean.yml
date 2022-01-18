@@ -29,7 +29,7 @@ jobs:
           path: ${{ github.sha }}.tar.gz
 
   prepare-release-on-servers:
-    name: "Digital Ocean"
+    name: "Digital Ocean Deployment"
     runs-on: ubuntu-latest
     needs: create-deployment-artifacts
     steps:
@@ -41,7 +41,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          passport: ${{ secrets.PASSPORT }}
+          password: ${{ secrets.PASSPORT }}
           port: ${{ secrets.PORT }}
           source: ${{ github.sha }}.tar.gz
           target: ${{ secrets.TARGET }}/artifacts
