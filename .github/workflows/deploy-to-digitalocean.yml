@@ -10,7 +10,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Compile CSS and Javascript
-          run: |
-            npm ci
-            npm run prod
-   
+        run: |
+          npm ci
+          npm run prod
+  
