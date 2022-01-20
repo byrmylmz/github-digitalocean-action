@@ -75,9 +75,9 @@ jobs:
         uses: appleboy/ssh-action@master
         env: 
           GITHUB_SHA: ${{ github.sha }}
-          RELEASE_PATH: ${{ secrets.TARGET  }}/releases/${{ github.sha }}
-          ACTIVE_RELEASE_PATH: ${{ secrets.TARGET  }}/current
-          STORAGE_PATH: ${{ secrets.TARGET  }}/storage
+          RELEASE_PATH: ${{ secrets.TARGET }}/releases/${{ github.sha }}
+          ACTIVE_RELEASE_PATH: ${{ secrets.TARGET }}/current
+          STORAGE_PATH: ${{ secrets.TARGET }}/storage
           BASE_PATH: ${{ secrets.TARGET }}
           LARAVEL_ENV: ${{ secrets.LARAVEL_ENV }}
         with: 
