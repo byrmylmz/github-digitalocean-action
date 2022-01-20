@@ -45,4 +45,24 @@ jobs:
           port: ${{ secrets.PORT }}
           source: ${{ github.sha }}.tar.gz
           target: ${{ secrets.TARGET }}/artifacts
+          
+      - name: Extract archive and create directories
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSPORT }}
+          port: ${{ secrets.PORT }}
+          envs: GITHUB_SHA
+          script: |
+            mkdir -p "${{ secrets.TARGET }}/releases/${GITHUB_SHA}"
+            tar xzf ${{ secrets.TARGET }}/artifacts/${GITHUB_SHA}.tar.gz -C "${{ matrix.server.path }}/releases/${GITHUB_SHA}"
+            rm -rf ${{ secrets.TARGET }}/releases/${GITHUB_SHA}/storage
+
+            mkdir -p ${{ secrets.TARGET }}/storage/{app,public,framework,logs}
+            mkdir -p ${{ secrets.TARGET }}/storage/framework/{cache,sessions,testing,views}
+            mkdir -p ${{ secrets.TARGET }}/storage/framework/cache/data
+            chmod -R 0777 ${{ secrets.TARGET }}/storage
       
